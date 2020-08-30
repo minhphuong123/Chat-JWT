@@ -4,9 +4,9 @@ var app = express();
 // Server Chat
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var UserLogin = [];
-io.on("connection", function(socket) {
 
+io.on("connection", function(socket) {
+    var UserLogin = [];
 
     console.log('Có người vừa kết nối, ID là: ' + socket.id);
     socket.on("disconnect", function() {

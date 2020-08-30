@@ -113,6 +113,7 @@ app.post('/register', function(req, res, next) {
 
 //login route
 app.post('/login', async function(req, res, next) {
+    console.log(req.body);
     const { name, password } = req.body;
     if (name && password) {
         var user = await getUser({ name: name });
@@ -129,7 +130,8 @@ app.post('/login', async function(req, res, next) {
             // let token = jwt.sign(payload, jwtOptions.secretOrKey);
             // res.send(JSON.stringify());
             console.log('login');
-            res.redirect('/chat');
+            // res.redirect('/chat');
+            res.json({ 'message': 'success' });
 
             // res.json({ msg: 'ok', token: token });
 

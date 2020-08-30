@@ -1,17 +1,10 @@
 var socket = io('http://localhost:2000');
 
-// function dangnhap() {
-//     console.log($("#user").val());
-//     $('form').submit(function(e) {
-//         e.preventDefault();
-
-//     });
-// }
-
 
 socket.on("server-res-login", function(data) {
-    // alert('Đăng nhập thành công!');
-    $('#currentUser').html(data);
+    alert(data);
+    // $("#currentUser").val() = data;
+    $("#currentUser").html('data');
 
 });
 socket.on('server-send-list', function(data) {
@@ -36,16 +29,21 @@ $(document).ready(function() {
 
 
     $('#login').click(function() {
-        console.log($('#user').val());
-        socket.emit('Client-send-login', $('#user').val());
-
-        // $.post('http://localhost:2000/login', { name: $('#user'), password: $('#pass') }, function(res) {
-        //     console.log(res);
-        // });
 
 
 
+        $.post('http://localhost:3000/login', { name: $('#user').val(), password: $('#pass').val() },
+            function(res) {
+
+                if (res.message == 'success') {
+                    socket.emit('Client-send-login', $('#user').val());
+
+                    window.location.href = 'http://localhost:3000/chat';
+
+                }
+            });
     });
+
 
     $('#logOut').click(function() {
         socket.emit('logout');
